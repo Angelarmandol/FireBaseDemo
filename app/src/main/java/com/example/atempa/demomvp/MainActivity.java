@@ -8,18 +8,14 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.atempa.demomvp.model.Person;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.example.atempa.demomvp.domain.FirebaseHelper;
+import com.example.atempa.demomvp.domain.model.Person;
 
 import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
     EditText txtName, txtLastName, txtEmail;
     RecyclerView recyclerView;
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,14 +26,6 @@ public class MainActivity extends AppCompatActivity {
         txtLastName = findViewById(R.id.txt_last_name);
         txtEmail = findViewById(R.id.txt_email);
         recyclerView = findViewById(R.id.rv_list_persons);
-
-        setUpFirebase();
-    }
-
-    private void setUpFirebase() {
-        FirebaseApp.initializeApp(this);
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
     }
 
     @Override
@@ -60,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 person.setName(name);
                 person.setLastName(lastName);
                 person.setEmail(email);
-                databaseReference.child("Person").child(person.getUid()).setValue(person);
+                FirebaseHelper.getInstance().getDatabaseReference().child("Person").child(person.getUid()).setValue(person);
                 showMessage("Agregado");
                 clean();
                 break;

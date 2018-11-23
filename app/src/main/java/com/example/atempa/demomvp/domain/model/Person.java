@@ -1,4 +1,4 @@
-package com.example.atempa.demomvp.model;
+package com.example.atempa.demomvp.domain.model;
 
 public class Person {
     private String uid;
