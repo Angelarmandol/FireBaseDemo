@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.atempa.demomvp.domain.PersonRepositoryImpl;
@@ -15,6 +17,7 @@ import com.example.atempa.demomvp.presenters.PersonPresenterImpl;
 public class MainActivity extends AppCompatActivity implements PersonView {
     EditText txtName, txtLastName, txtEmail;
     RecyclerView recyclerView;
+    ProgressBar progressBar;
     PersonPresenter presenter;
 
     @Override
@@ -26,8 +29,15 @@ public class MainActivity extends AppCompatActivity implements PersonView {
         txtLastName = findViewById(R.id.txt_last_name);
         txtEmail = findViewById(R.id.txt_email);
         recyclerView = findViewById(R.id.rv_list_persons);
+        progressBar = findViewById(R.id.progressBar);
 
         presenter = new PersonPresenterImpl(this, new PersonRepositoryImpl());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
@@ -59,6 +69,16 @@ public class MainActivity extends AppCompatActivity implements PersonView {
         }
 
         return true;
+    }
+
+    @Override
+    public void showProgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgressBar() {
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override

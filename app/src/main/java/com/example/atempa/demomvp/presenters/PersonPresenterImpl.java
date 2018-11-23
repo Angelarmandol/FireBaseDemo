@@ -17,6 +17,7 @@ public class PersonPresenterImpl implements PersonPresenter {
 
     @Override
     public void createPerson(String name, String lastName, String email) {
+        mView.showProgressBar();
         if ((name != null && !name.equals("")) && (lastName != null && !lastName.equals("")) && (email != null && !email.equals(""))) {
             Person person = new Person(
                UUID.randomUUID().toString(),
@@ -26,8 +27,10 @@ public class PersonPresenterImpl implements PersonPresenter {
             );
 
             mRepository.savePerson(person);
+            mView.hideProgressBar();
             mView.showMessage("Registrado");
         } else {
+            mView.hideProgressBar();
             mView.showMessage("Ingresar datos solicitados");
         }
 
