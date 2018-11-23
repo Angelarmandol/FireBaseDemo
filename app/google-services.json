@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "558153095474",
+    "firebase_url": "https://demomvp-359fb.firebaseio.com",
+    "project_id": "demomvp-359fb",
+    "storage_bucket": "demomvp-359fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:558153095474:android:a0dee502151ea491",
+        "android_client_info": {
+          "package_name": "com.example.atempa.demomvp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "558153095474-6ldlfajap6gfcoprnhlvbnj568d6an33.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.atempa.demomvp",
+            "certificate_hash": "929cf9f028fc5d3463ced582ad5019938d52e0e9"
+          }
+        },
+        {
+          "client_id": "558153095474-vfiu3pf5462kjv5j94itsseaskqesd4m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApy_-n2ytUiLhJgFpaAl11_A19hnme0Do"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "558153095474-vfiu3pf5462kjv5j94itsseaskqesd4m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

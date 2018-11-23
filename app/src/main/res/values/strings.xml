@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">DemoMvp</string>
+    <string name="label_name">Name</string>
+    <string name="label_lastName">Last name</string>
+    <string name="label_email">Email</string>
+    <string name="label_header">List of Persons</string>
+</resources>
