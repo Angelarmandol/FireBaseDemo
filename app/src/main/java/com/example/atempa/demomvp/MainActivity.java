@@ -8,14 +8,14 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.atempa.demomvp.domain.FirebaseHelper;
-import com.example.atempa.demomvp.domain.model.Person;
+import com.example.atempa.demomvp.domain.PersonRepositoryImpl;
+import com.example.atempa.demomvp.presenters.PersonPresenter;
+import com.example.atempa.demomvp.presenters.PersonPresenterImpl;
 
-import java.util.UUID;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements PersonView {
     EditText txtName, txtLastName, txtEmail;
     RecyclerView recyclerView;
+    PersonPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
         txtLastName = findViewById(R.id.txt_last_name);
         txtEmail = findViewById(R.id.txt_email);
         recyclerView = findViewById(R.id.rv_list_persons);
+
+        presenter = new PersonPresenterImpl(this, new PersonRepositoryImpl());
     }
 
     @Override
@@ -36,21 +38,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        String name = txtName.getText().toString();
-        String lastName = txtLastName.getText().toString();
-        String email = txtEmail.getText().toString();
-        Person person = null;
-
         switch (item.getItemId()) {
             case R.id.icon_add: {
-                person = new Person();
-                person.setUid(UUID.randomUUID().toString());
-                person.setName(name);
-                person.setLastName(lastName);
-                person.setEmail(email);
-                FirebaseHelper.getInstance().getDatabaseReference().child("Person").child(person.getUid()).setValue(person);
-                showMessage("Agregado");
-                clean();
+                presenter.createPerson(
+                   txtName.getText().toString(),
+                   txtLastName.getText().toString(),
+                   txtEmail.getText().toString()
+                );
                 break;
             }
             case R.id.icon_save: {
@@ -67,13 +61,15 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private void clean() {
+    @Override
+    public void clean() {
         txtName.setText("");
         txtLastName.setText("");
         txtEmail.setText("");
     }
 
-    private void showMessage(String message) {
+    @Override
+    public void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

@@ -9,6 +9,13 @@ public class Person {
     public Person() {
     }
 
+    public Person(String uid, String name, String lastName, String email) {
+        this.uid = uid;
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
     public String getUid() {
         return uid;
     }
