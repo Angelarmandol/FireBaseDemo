@@ -1,9 +1,13 @@
 package com.example.atempa.demomvp.presenters;
 
+import android.util.Log;
+
+import com.example.atempa.demomvp.PersonAdapter;
 import com.example.atempa.demomvp.PersonView;
 import com.example.atempa.demomvp.domain.PersonRepository;
 import com.example.atempa.demomvp.domain.model.Person;
 
+import java.util.List;
 import java.util.UUID;
 
 public class PersonPresenterImpl implements PersonPresenter {
@@ -13,6 +17,19 @@ public class PersonPresenterImpl implements PersonPresenter {
     public PersonPresenterImpl(PersonView view, PersonRepository repository) {
         mView = view;
         mRepository = repository;
+    }
+
+    @Override
+    public void getPersonList() {
+        mRepository.fetchPersons(
+          new PersonRepository.GetPersonsCallback() {
+            @Override
+            public void onDataLoaded(List<Person> persons) {
+              Log.d("DATA ", "No Persons " + persons.size());
+              mView.fillAdapter(persons);
+            }
+          }
+        );
     }
 
     @Override
@@ -31,9 +48,19 @@ public class PersonPresenterImpl implements PersonPresenter {
             mView.showMessage("Registrado");
         } else {
             mView.hideProgressBar();
-            mView.showMessage("Ingresar datos solicitados");
+            mView.showMessage("Ingresa los datos solicitados");
         }
 
         mView.clean();
+    }
+
+    @Override
+    public void updatePerson(String name, String lastName, String email) {
+
+    }
+
+    @Override
+    public void deletePerson(String uid) {
+
     }
 }
