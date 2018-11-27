@@ -1,8 +1,5 @@
 package com.example.atempa.demomvp.presenters;
 
-import android.util.Log;
-
-import com.example.atempa.demomvp.PersonAdapter;
 import com.example.atempa.demomvp.PersonView;
 import com.example.atempa.demomvp.domain.PersonRepository;
 import com.example.atempa.demomvp.domain.model.Person;
@@ -21,12 +18,13 @@ public class PersonPresenterImpl implements PersonPresenter {
 
     @Override
     public void getPersonList() {
+        mView.showProgressBar();
         mRepository.fetchPersons(
           new PersonRepository.GetPersonsCallback() {
             @Override
             public void onDataLoaded(List<Person> persons) {
-              Log.d("DATA ", "No Persons " + persons.size());
               mView.fillAdapter(persons);
+              mView.hideProgressBar();
             }
           }
         );

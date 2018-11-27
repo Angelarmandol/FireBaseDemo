@@ -1,7 +1,6 @@
 package com.example.atempa.demomvp.domain;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.example.atempa.demomvp.domain.model.Person;
 import com.google.firebase.database.DataSnapshot;
@@ -16,14 +15,15 @@ import java.util.concurrent.Executors;
 public class PersonRepositoryImpl implements PersonRepository {
     private FirebaseHelper helper;
     private final static String KEY = "Person";
+    private ExecutorService executor;
 
     public PersonRepositoryImpl() {
         helper = FirebaseHelper.getInstance();
+        executor = Executors.newSingleThreadExecutor();
     }
 
     @Override
     public void fetchPersons(final GetPersonsCallback callback) {
-        ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(new Runnable() {
             @Override
             public void run() {
